@@ -252,3 +252,13 @@ export function speakGreeting(name, table, seat) {
     console.warn('TTS Error', e);
   }
 }
+// Falls noch nicht vorhanden: kurze Auswahl an Sprüchen
+export function getRandomSpeech() {
+  const speeches = [
+    "Schön, dass du unseren besonderen Tag mit uns feierst!",
+    "Lasst uns zusammen lachen, tanzen und feiern!",
+    "Ein Hoch auf die Liebe und auf euch alle!",
+    "Auf eine unvergessliche Hochzeitsfeier!"
+  ];
+  return speeches[Math.floor(Math.random() * speeches.length)];
+}
