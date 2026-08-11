@@ -2,6 +2,10 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
+  <!-- Optional: Falls deine Seite unter einem Subpath (z. B. /Sitzplan-test/) liegt,
+       entferne das Kommentarzeichen und passe den Pfad an:
+  <base href="/Sitzplan-test/">
+  -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Hochzeits-Sitzplan Anja & Dino</title>
   <link rel="stylesheet" href="style.css">
@@ -31,7 +35,17 @@
 
       <div class="search-box">
         <label for="search-input" class="visually-hidden">Vorname</label>
-        <input type="text" id="search-input" placeholder="Dein Vorname (z. B. Max)..." autocomplete="off" autocapitalize="off" autocorrect="off" aria-autocomplete="list" aria-controls="search-results" aria-haspopup="listbox">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Dein Vorname (z. B. Max)..."
+          autocomplete="off"
+          autocapitalize="off"
+          autocorrect="off"
+          aria-autocomplete="list"
+          aria-controls="search-results"
+          aria-haspopup="listbox"
+        />
         <div id="search-results" role="listbox" class="results-dropdown" aria-label="Suchergebnisse"></div>
       </div>
     </section>
@@ -44,11 +58,26 @@
         </div>
 
         <div class="map-actions-top" role="toolbar" aria-label="Aktionen">
+          <!-- TTS controls: Toggle, Select, Test, Rate & Volume -->
           <div class="tts-controls" aria-hidden="false">
             <button id="tts-toggle" class="btn-speech" aria-pressed="false" title="Sprachausgabe ein-/ausschalten">🔊 TTS</button>
-            <select id="voice-select" class="voice-select" aria-label="Stimme auswählen">
-              <option value="">Stimme wählen…</option>
-            </select>
+
+            <div class="voice-wrap" style="display:inline-flex;align-items:center;gap:0.5rem;margin-left:0.5rem;">
+              <select id="voice-select" class="voice-select" aria-label="Stimme auswählen">
+                <option value="">Stimme wählen…</option>
+              </select>
+
+              <button id="voice-test-btn" class="btn-creme" title="Ausgewählte Stimme testen">Stimme testen</button>
+            </div>
+
+            <div class="voice-sliders" style="display:inline-flex;align-items:center;gap:0.6rem;margin-left:0.6rem;">
+              <label for="voice-rate" class="visually-hidden">Tempo</label>
+              <input id="voice-rate" type="range" min="0.75" max="1.25" step="0.05" value="0.95" aria-label="Sprechtempo">
+              <label for="voice-volume" class="visually-hidden">Lautstärke</label>
+              <input id="voice-volume" type="range" min="0" max="1" step="0.05" value="1" aria-label="Lautstärke">
+            </div>
+
+            <div id="voice-status" style="display:inline-block;margin-left:0.5rem;color:#666;font-size:0.9rem;" aria-live="polite"></div>
           </div>
         </div>
       </div>
