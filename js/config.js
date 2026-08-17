@@ -14,6 +14,11 @@ export const CONFIG = {
     confettiAnimation: true, // Konfetti-Animation
     toiletToggle: true, // WC-Anzeige Umschalter
     darkMode: false, // Dark Mode standardmäßig aus
-    undoDelete: true // Undo-Funktion für Löschen
+    undoDelete: true, // Undo-Funktion für Löschen
+    taxiFeature: true // Taxi-Feature aktiviert
+  },
+  taxi: {
+    single: '', // Telefonnummer für Einzeltaxi
+    group: '' // Telefonnummer für Gruppentaxi
   }
 };
