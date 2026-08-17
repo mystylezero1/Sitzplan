@@ -118,6 +118,9 @@ class WeddingApp {
     this.showLoading();
     try {
       const res = await fetch('data.json');
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
       const jsonData = await res.json();
       this.data.tables = jsonData.tables;
 
@@ -138,9 +141,12 @@ class WeddingApp {
         dietary: guest.dietary || '',
         allergies: guest.allergies || ''
       }));
+
+      console.log(`Erfolgreich ${this.data.guests.length} Gäste geladen`);
     } catch (e) {
       console.error("Fehler beim Laden von data.json", e);
       alert("Fehler beim Laden der Daten. Bitte überprüfe deine Internetverbindung.");
+      this.data.guests = []; // Fallback
     } finally {
       this.hideLoading();
     }
