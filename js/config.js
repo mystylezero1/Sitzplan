@@ -23,6 +23,6 @@ export const CONFIG = {
     group: '+49281großraum' // Telefonnummer für Gruppentaxi - HIER EINTRAGEN
   },
   spotify: {
-    playlistUrl: 'https://open.spotify.com/playlist/deine-playlist-id' // Spotify Playlist URL - HIER EINTRAGEN
+    playlistUrl: 'https://open.spotify.com/playlist/0JUN3xAjBCaxL0UwXqlFO8?si=y9ZMWdueQ2WHWD7pmQVJwg&utm_source=whatsapp&pi=IAL6_fS3TUKX3&sci=spotify%3Acard-config%3A0VUG1Xza74adnjwokQU1Gm'
   }
 };
