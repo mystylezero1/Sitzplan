@@ -1,1 +1,142 @@
 hochzeit-konfiguration (1).json = Testkonfig für Telefonnummern Einzeltaxi und Großraumtaxi + Spotify Testurl
+
+
+
+
+💡 Einfachste Methode:
+Konfiguration direkt in die config.js einbauen - dann ist sie sofort aktiv, ohne Admin-Konsole!
+
+config.js
++4
+  },
+  taxi: {
+    single: '', // Telefonnummer für Einzeltaxi
+    group: '' // Telefonnummer für Gruppentaxi
+  }
+
+Read
+config.js
+config.js
++3
+-7
+  taxi: {
+    single: '', // Telefonnummer für Einzeltaxi
+    group: '' // Telefonnummer für Gruppentaxi
+    playlistUrl: '' // Spotify Playlist URL - HIER EINTRAGEN
+  }
+
+Perfekt! Jetzt ist es viel einfacher:
+
+✅ Neue einfache Methode:
+Trage die Nummern/URL direkt in config.js ein:
+
+
+
+javascript
+taxi: {
+  single: '0123456789', // HIER deine Nummer eintragen
+  group: '0987654321'   // HIER deine Nummer eintragen
+},
+spotify: {
+  playlistUrl: 'https://open.spotify.com/playlist/deine-playlist-id' // HIER deine URL eintragen
+}
+🚀 Einfacher Workflow:
+config.js öffnen und Nummern/URL eintragen
+5 Dateien hochladen (inkl. geänderte config.js)
+Fertig! Alles ist sofort aktiv auf GitHub Pages
+💡 Vorteile:
+Keine Admin-Konsole nötig für die Einrichtung
+Kein localStorage - alles ist direkt im Code
+Sofort aktiv nach dem Upload
+Backup ist einfach: die config.js ist dein Backup
+Das ist definitiv die einfachste Lösung! Du musst nur die eine Datei config.js bearbeiten und hochladen.
+
+
+
+
+
+
+
+mach mir bitte in die config als beispiel +49281taxi und +49281großraum. dann weiss ich wo ich die eintragen muss.
+
+
+config.js
++3
+-3
+  },
+  spotify: {
+    playlistUrl: '' // Spotify Playlist URL - HIER EINTRAGEN
+    playlistUrl: 'https://open.spotify.com/playlist/deine-playlist-id' // Spotify Playlist URL - HIER EINTRAGEN
+  }
+
+Perfekt! Ich habe die Beispielwerte eingetragen. Hier siehst du genau wo du die echten Nummern/URL eintragen musst:
+
+📝 In config.js (Zeilen 21-27):
+
+
+javascript
+taxi: {
+  single: '+49281taxi', // HIER deine echte Nummer eintragen
+  group: '+49281großraum' // HIER deine echte Nummer eintragen
+},
+spotify: {
+  playlistUrl: 'https://open.spotify.com/playlist/deine-playlist-id' // HIER deine echte URL eintragen
+}
+✅ Was du jetzt tun musst:
+js/config.js öffnen (ist bereits offen)
+Die Beispielwerte ersetzen:
+'+49281taxi' → deine echte Einzel-Taxi Nummer
+'+49281großraum' → deine echte Großraumtaxi Nummer
+'https://open.spotify.com/playlist/deine-playlist-id' → deine echte Spotify URL
+5 Dateien hochladen (inkl. der geänderten config.js)
+Fertig! Alles ist sofort aktiv
+Die Nummern/URL musst du nur zwischen den Anführungszeichen eintragen, genau wie die Beispiele!
+
+
+
+
+
+
+
+welche dateien muss ich alle hochladen? und zeige mir den einfachsten weg die spotify url zu ändern sollten alle stricke reissen.
+
+
+📋 Alle Dateien zum Hochladen:
+Diese 5 Dateien musst du hochladen:
+
+index.html
+js/config.js ← WICHTIG: Hier sind deine Nummern/URL
+js/app.js
+js/admin.js
+style.css
+🚨 Einfachster Notfall-Plan für Spotify URL Änderung:
+Wenn "alle Stricke reißen" - direkt auf GitHub bearbeiten:
+
+Methode: GitHub Web-Editor (schnellste Lösung)
+Gehe zu deinem GitHub Repository
+Klicke auf js/config.js
+Klicke auf das Stift-Symbol ✏️ (oben rechts "Edit this file")
+Finde diese Zeile:
+
+
+javascript
+playlistUrl: 'https://open.spotify.com/playlist/deine-playlist-id'
+Ersetze die URL mit deiner neuen Spotify URL
+Scrolle nach unten zum "Commit changes" Bereich
+Gib ein: "Spotify URL aktualisiert"
+Klicke "Commit changes"
+✅ Vorteile dieser Methode:
+Kein lokaler Editor nötig
+Kein Upload nötig
+Sofort aktiv (GitHub Pages aktualisiert automatisch)
+Funktioniert von jedem Gerät (Handy, Tablet, PC)
+Kein GitHub-Zugriff nötig (nur Browser)
+💡 Das ist dein "Notfall-Schalter":
+Egal was passiert - du kannst die Spotify URL (und auch die Taxi-Nummern) immer innerhalb von 2 Minuten direkt auf GitHub ändern, ohne irgendeine Software zu installieren!
+
+
+
+
+
+
+
