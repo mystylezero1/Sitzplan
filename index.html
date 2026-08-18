@@ -58,10 +58,12 @@
           <p id="target-seat-info" class="sub-info">Wähle oben deinen Namen aus.</p>
         </div>
         <div class="map-actions-top">
-          <!-- Alle 4 Buttons kompakt auf einer Linie -->
+          <!-- Alle 6 Buttons kompakt auf einer Linie -->
           <button id="reset-zoom-btn" class="btn-speech hidden">🔍 Übersicht</button>
           <button id="toilet-btn" class="btn-creme">🚻 WC</button>
           <button id="speech-btn" class="btn-speech">🔊 Spruch</button>
+          <button id="taxi-btn" class="btn-creme hidden">🚕 Taxi</button>
+          <a id="spotify-link" href="#" target="_blank" class="btn-creme hidden">🎵 Musik</a>
           <a id="photo-link" href="#" target="_blank" class="btn-gold">📷 Fotos</a>
         </div>
       </div>
@@ -88,6 +90,32 @@
     <button id="disambiguation-close-btn" class="btn-secondary" style="margin-top:1rem; width:100%;">Schließen</button>
   </dialog>
 
+  <dialog id="taxi-dialog" class="modal">
+    <div class="taxi-header">
+      <h3>🚕 Taxi bestellen</h3>
+      <button id="taxi-close-btn" class="btn-close">&times;</button>
+    </div>
+    <div class="taxi-body">
+      <p>Wähle eine Taxi-Option:</p>
+      <div class="taxi-options">
+        <a id="taxi-single-btn" href="#" class="btn-gold taxi-option-btn">
+          <div class="taxi-option-icon">🚕</div>
+          <div class="taxi-option-text">
+            <div class="taxi-option-title">Einzel-Taxi</div>
+            <div class="taxi-option-desc">Für 1-4 Personen</div>
+          </div>
+        </a>
+        <a id="taxi-group-btn" href="#" class="btn-gold taxi-option-btn">
+          <div class="taxi-option-icon">🚐</div>
+          <div class="taxi-option-text">
+            <div class="taxi-option-title">Großraumtaxi</div>
+            <div class="taxi-option-desc">Für bis zu 7 Personen</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </dialog>
+
   <dialog id="admin-dialog" class="modal modal-large">
     <div class="admin-header">
       <h3>🔒 Admin Konsole (Anja & Dino)</h3>
@@ -102,6 +130,11 @@
         <input type="file" id="excel-import-file" accept=".xlsx, .xls" style="display:none;">
         <button id="json-export-btn" class="btn-gold">💾 Neue data.json herunterladen</button>
         <button id="excel-export-btn" class="btn-creme">📥 Excel Backup (.xlsx)</button>
+        <button id="config-export-btn" class="btn-creme">⚙️ Konfiguration sichern</button>
+        <label for="config-import-file" class="btn-creme custom-file-upload">
+          📂 Konfiguration wiederherstellen
+        </label>
+        <input type="file" id="config-import-file" accept=".json" style="display:none;">
       </div>
 
       <div class="admin-stats" id="admin-stats">
@@ -113,6 +146,28 @@
         <h4>⚙️ Feature-Einstellungen</h4>
         <div class="feature-toggles-container" id="feature-toggles">
           <!-- Feature-Toggles werden dynamisch eingefügt -->
+        </div>
+      </div>
+
+      <div class="admin-section">
+        <h4>🎵 Spotify Playlist</h4>
+        <div class="spotify-config">
+          <label for="spotify-url-input">Spotify Playlist URL:</label>
+          <input type="url" id="spotify-url-input" placeholder="https://open.spotify.com/playlist/..." style="width: 100%; padding: 0.5rem; margin-top: 0.5rem;">
+          <button id="save-spotify-btn" class="btn-gold" style="margin-top: 0.5rem;">💾 Speichern</button>
+        </div>
+      </div>
+
+      <div class="admin-section">
+        <h4>🚕 Taxi Konfiguration</h4>
+        <div class="taxi-config">
+          <label for="taxi-single-input">Einzel-Taxi Telefonnummer:</label>
+          <input type="tel" id="taxi-single-input" placeholder="z.B. 0123456789" style="width: 100%; padding: 0.5rem; margin-top: 0.5rem;">
+          
+          <label for="taxi-group-input" style="margin-top: 1rem; display: block;">Großraumtaxi Telefonnummer:</label>
+          <input type="tel" id="taxi-group-input" placeholder="z.B. 0123456789" style="width: 100%; padding: 0.5rem; margin-top: 0.5rem;">
+          
+          <button id="save-taxi-btn" class="btn-gold" style="margin-top: 0.5rem;">💾 Speichern</button>
         </div>
       </div>
 

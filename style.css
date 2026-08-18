@@ -567,3 +567,87 @@ body.dark-mode .guest-notes-section {
 body.dark-mode .note-label {
   color: #D4AF37;
 }
+
+/* Taxi Modal Styles */
+.taxi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--gold-light);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.taxi-body {
+  text-align: center;
+}
+
+.taxi-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.taxi-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.taxi-option-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.taxi-option-icon {
+  font-size: 2rem;
+}
+
+.taxi-option-text {
+  text-align: left;
+  flex: 1;
+}
+
+.taxi-option-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--white);
+}
+
+.taxi-option-desc {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.taxi-config {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.taxi-config label {
+  font-weight: 600;
+  color: var(--gold-dark);
+}
+
+body.dark-mode .taxi-config label {
+  color: #D4AF37;
+}
+
+.taxi-config input {
+  padding: 0.5rem;
+  border: 1px solid var(--gold-light);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+body.dark-mode .taxi-config input {
+  background: #2a2a2a;
+  border-color: #3a3a3a;
+  color: #f0f0f0;
+}
