@@ -383,11 +383,44 @@ body.dark-mode .admin-section h4 {
 
 @media (max-width: 600px) {
   .header h1 { font-size: 1.8rem; }
+  
+  /* Mobile Button Optimierung */
+  .map-actions-top {
+    gap: 0.3rem;
+  }
+  
+  .map-actions-top .btn-gold,
+  .map-actions-top .btn-creme,
+  .map-actions-top .btn-speech {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+    flex: 1 1 auto;
+    min-width: 80px;
+  }
+  
+  /* Spotify und Taxi Buttons auf Mobile sichtbar machen */
+  #taxi-btn, #spotify-link {
+    display: inline-flex !important;
+  }
 }
 
 @media (max-width: 1024px) {
   #admin-trigger-btn {
     display: none !important;
+  }
+  
+  /* Bessere mobile Darstellung der Buttons */
+  .map-actions-top {
+    justify-content: center;
+  }
+  
+  .map-actions-top .btn-gold,
+  .map-actions-top .btn-creme,
+  .map-actions-top .btn-speech {
+    flex: 1 1 45%;
+    max-width: 48%;
+    text-align: center;
+    justify-content: center;
   }
 }
 
