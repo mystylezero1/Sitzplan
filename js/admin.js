@@ -27,6 +27,10 @@ export class AdminModule {
     document.getElementById('json-export-btn')?.addEventListener('click', () => this.exportToJson());
     document.getElementById('excel-import-file')?.addEventListener('change', (e) => this.importFromExcel(e));
     document.getElementById('undo-delete-btn')?.addEventListener('click', () => this.undoLastDelete());
+    document.getElementById('save-spotify-btn')?.addEventListener('click', () => this.saveSpotifyConfig());
+    document.getElementById('save-taxi-btn')?.addEventListener('click', () => this.saveTaxiConfig());
+    document.getElementById('config-export-btn')?.addEventListener('click', () => this.exportConfig());
+    document.getElementById('config-import-file')?.addEventListener('change', (e) => this.importConfig(e));
 
     this.renderFeatureToggles();
   }
@@ -43,6 +47,8 @@ export class AdminModule {
   openAdminPanel() {
     this.renderAdminTable();
     this.renderFeatureToggles();
+    this.renderSpotifyConfig();
+    this.renderTaxiConfig();
     this.dialog.showModal();
   }
 
@@ -58,7 +64,9 @@ export class AdminModule {
       confettiAnimation: '🎉 Konfetti-Animation',
       toiletToggle: '🚻 WC-Umschalter',
       darkMode: '🌙 Dark Mode',
-      undoDelete: '↩️ Undo-Funktion'
+      undoDelete: '↩️ Undo-Funktion',
+      spotifyFeature: '🎵 Spotify Playlist',
+      taxiFeature: '🚕 Taxi-Feature'
     };
 
     Object.keys(this.config.features).forEach(featureKey => {
@@ -91,6 +99,30 @@ export class AdminModule {
         if (featureKey === 'speechGreeting') {
           const speechBtn = document.getElementById('speech-btn');
           if (speechBtn) speechBtn.style.display = e.target.checked ? 'inline-flex' : 'none';
+        }
+        if (featureKey === 'spotifyFeature') {
+          const spotifyBtn = document.getElementById('spotify-link');
+          if (spotifyBtn) {
+            if (e.target.checked && this.config.spotify.playlistUrl) {
+              spotifyBtn.style.display = 'inline-flex';
+              spotifyBtn.classList.remove('hidden');
+            } else {
+              spotifyBtn.style.display = 'none';
+              spotifyBtn.classList.add('hidden');
+            }
+          }
+        }
+        if (featureKey === 'taxiFeature') {
+          const taxiBtn = document.getElementById('taxi-btn');
+          if (taxiBtn) {
+            if (e.target.checked && (this.config.taxi.single || this.config.taxi.group)) {
+              taxiBtn.style.display = 'inline-flex';
+              taxiBtn.classList.remove('hidden');
+            } else {
+              taxiBtn.style.display = 'none';
+              taxiBtn.classList.add('hidden');
+            }
+          }
         }
       });
 
@@ -321,5 +353,185 @@ export class AdminModule {
       }
       this.renderAdminTable();
     }
+  }
+
+  renderSpotifyConfig() {
+    const spotifyInput = document.getElementById('spotify-url-input');
+    if (spotifyInput) {
+      spotifyInput.value = this.config.spotify.playlistUrl || '';
+    }
+  }
+
+  saveSpotifyConfig() {
+    const spotifyInput = document.getElementById('spotify-url-input');
+    if (spotifyInput) {
+      const newUrl = spotifyInput.value.trim();
+      this.config.spotify.playlistUrl = newUrl;
+      
+      // Speichern in localStorage
+      localStorage.setItem('wedding_spotify_url', newUrl);
+      
+      // Sofort anwenden
+      const spotifyBtn = document.getElementById('spotify-link');
+      if (spotifyBtn) {
+        if (newUrl && this.config.features.spotifyFeature) {
+          spotifyBtn.href = newUrl;
+          spotifyBtn.style.display = 'inline-flex';
+          spotifyBtn.classList.remove('hidden');
+        } else {
+          spotifyBtn.style.display = 'none';
+          spotifyBtn.classList.add('hidden');
+        }
+      }
+      
+      alert('Spotify Playlist URL gespeichert!');
+    }
+  }
+
+  renderTaxiConfig() {
+    const taxiSingleInput = document.getElementById('taxi-single-input');
+    const taxiGroupInput = document.getElementById('taxi-group-input');
+    if (taxiSingleInput) {
+      taxiSingleInput.value = this.config.taxi.single || '';
+    }
+    if (taxiGroupInput) {
+      taxiGroupInput.value = this.config.taxi.group || '';
+    }
+  }
+
+  saveTaxiConfig() {
+    const taxiSingleInput = document.getElementById('taxi-single-input');
+    const taxiGroupInput = document.getElementById('taxi-group-input');
+    
+    if (taxiSingleInput && taxiGroupInput) {
+      const singleNumber = taxiSingleInput.value.trim();
+      const groupNumber = taxiGroupInput.value.trim();
+      
+      this.config.taxi.single = singleNumber;
+      this.config.taxi.group = groupNumber;
+      
+      // Speichern in localStorage
+      localStorage.setItem('wedding_taxi_single', singleNumber);
+      localStorage.setItem('wedding_taxi_group', groupNumber);
+      
+      // Sofort anwenden
+      const taxiBtn = document.getElementById('taxi-btn');
+      if (taxiBtn) {
+        if ((singleNumber || groupNumber) && this.config.features.taxiFeature) {
+          taxiBtn.style.display = 'inline-flex';
+          taxiBtn.classList.remove('hidden');
+        } else {
+          taxiBtn.style.display = 'none';
+          taxiBtn.classList.add('hidden');
+        }
+      }
+      
+      alert('Taxi Telefonnummern gespeichert!');
+    }
+  }
+
+  exportConfig() {
+    const configData = {
+      features: this.config.features,
+      spotify: {
+        playlistUrl: this.config.spotify.playlistUrl
+      },
+      taxi: {
+        single: this.config.taxi.single,
+        group: this.config.taxi.group
+      }
+    };
+
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(configData, null, 2));
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", "hochzeit-konfiguration.json");
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+    
+    alert('Konfiguration wurde heruntergeladen! Speichere diese Datei als Backup.');
+  }
+
+  importConfig(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const configData = JSON.parse(e.target.result);
+        
+        // Features wiederherstellen
+        if (configData.features) {
+          this.config.features = { ...this.config.features, ...configData.features };
+          localStorage.setItem('wedding_feature_settings', JSON.stringify(this.config.features));
+        }
+        
+        // Spotify URL wiederherstellen
+        if (configData.spotify && configData.spotify.playlistUrl) {
+          this.config.spotify.playlistUrl = configData.spotify.playlistUrl;
+          localStorage.setItem('wedding_spotify_url', configData.spotify.playlistUrl);
+        }
+        
+        // Taxi Nummern wiederherstellen
+        if (configData.taxi) {
+          if (configData.taxi.single !== undefined) {
+            this.config.taxi.single = configData.taxi.single;
+            localStorage.setItem('wedding_taxi_single', configData.taxi.single);
+          }
+          if (configData.taxi.group !== undefined) {
+            this.config.taxi.group = configData.taxi.group;
+            localStorage.setItem('wedding_taxi_group', configData.taxi.group);
+          }
+        }
+        
+        // UI aktualisieren
+        this.renderFeatureToggles();
+        this.renderSpotifyConfig();
+        this.renderTaxiConfig();
+        
+        // Sofort anwenden
+        document.body.classList.toggle('dark-mode', this.config.features.darkMode);
+        
+        const toiletBtn = document.getElementById('toilet-btn');
+        if (toiletBtn) toiletBtn.style.display = this.config.features.toiletToggle ? 'inline-flex' : 'none';
+        
+        const speechBtn = document.getElementById('speech-btn');
+        if (speechBtn) speechBtn.style.display = this.config.features.speechGreeting ? 'inline-flex' : 'none';
+        
+        const spotifyBtn = document.getElementById('spotify-link');
+        if (spotifyBtn) {
+          if (this.config.features.spotifyFeature && this.config.spotify.playlistUrl) {
+            spotifyBtn.href = this.config.spotify.playlistUrl;
+            spotifyBtn.style.display = 'inline-flex';
+            spotifyBtn.classList.remove('hidden');
+          } else {
+            spotifyBtn.style.display = 'none';
+            spotifyBtn.classList.add('hidden');
+          }
+        }
+        
+        const taxiBtn = document.getElementById('taxi-btn');
+        if (taxiBtn) {
+          if (this.config.features.taxiFeature && (this.config.taxi.single || this.config.taxi.group)) {
+            taxiBtn.style.display = 'inline-flex';
+            taxiBtn.classList.remove('hidden');
+          } else {
+            taxiBtn.style.display = 'none';
+            taxiBtn.classList.add('hidden');
+          }
+        }
+        
+        alert('Konfiguration erfolgreich wiederhergestellt!');
+        
+      } catch (error) {
+        alert('Fehler beim Laden der Konfiguration: ' + error.message);
+      }
+    };
+    reader.readAsText(file);
+    
+    // Reset input damit dieselbe Datei erneut geladen werden kann
+    event.target.value = '';
   }
 }

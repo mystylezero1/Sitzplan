@@ -15,10 +15,14 @@ export const CONFIG = {
     toiletToggle: true, // WC-Anzeige Umschalter
     darkMode: false, // Dark Mode standardmäßig aus
     undoDelete: true, // Undo-Funktion für Löschen
-    taxiFeature: true // Taxi-Feature aktiviert
+    taxiFeature: true, // Taxi-Feature aktiviert
+    spotifyFeature: true // Spotify Playlist Feature aktiviert
   },
   taxi: {
     single: '', // Telefonnummer für Einzeltaxi
     group: '' // Telefonnummer für Gruppentaxi
+  },
+  spotify: {
+    playlistUrl: '' // Spotify Playlist URL für Musikwünsche
   }
 };

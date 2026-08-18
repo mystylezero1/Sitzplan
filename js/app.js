@@ -44,6 +44,23 @@ class WeddingApp {
     if (savedSettings) {
       this.config.features = { ...this.config.features, ...JSON.parse(savedSettings) };
     }
+    
+    // Spotify URL aus localStorage laden
+    const savedSpotifyUrl = localStorage.getItem('wedding_spotify_url');
+    if (savedSpotifyUrl) {
+      this.config.spotify.playlistUrl = savedSpotifyUrl;
+    }
+    
+    // Taxi Telefonnummern aus localStorage laden
+    const savedTaxiSingle = localStorage.getItem('wedding_taxi_single');
+    const savedTaxiGroup = localStorage.getItem('wedding_taxi_group');
+    if (savedTaxiSingle) {
+      this.config.taxi.single = savedTaxiSingle;
+    }
+    if (savedTaxiGroup) {
+      this.config.taxi.group = savedTaxiGroup;
+    }
+    
     this.applyFeatureSettings();
   }
 
@@ -64,6 +81,8 @@ class WeddingApp {
     const toiletBtn = document.getElementById('toilet-btn');
     const speechBtn = document.getElementById('speech-btn');
     const darkModeBtn = document.getElementById('dark-mode-btn');
+    const spotifyBtn = document.getElementById('spotify-link');
+    const taxiBtn = document.getElementById('taxi-btn');
 
     if (toiletBtn) {
       toiletBtn.style.display = this.config.features.toiletToggle ? 'inline-flex' : 'none';
@@ -73,6 +92,24 @@ class WeddingApp {
     }
     if (darkModeBtn) {
       darkModeBtn.style.display = this.config.features.darkMode ? 'none' : 'inline-flex';
+    }
+    if (spotifyBtn) {
+      if (this.config.features.spotifyFeature && this.config.spotify.playlistUrl) {
+        spotifyBtn.style.display = 'inline-flex';
+        spotifyBtn.classList.remove('hidden');
+      } else {
+        spotifyBtn.style.display = 'none';
+        spotifyBtn.classList.add('hidden');
+      }
+    }
+    if (taxiBtn) {
+      if (this.config.features.taxiFeature && (this.config.taxi.single || this.config.taxi.group)) {
+        taxiBtn.style.display = 'inline-flex';
+        taxiBtn.classList.remove('hidden');
+      } else {
+        taxiBtn.style.display = 'none';
+        taxiBtn.classList.add('hidden');
+      }
     }
   }
 
@@ -111,6 +148,13 @@ class WeddingApp {
   applyConfig() {
     document.getElementById('app-title').innerText = `${this.config.names.bride} & ${this.config.names.groom}`;
     document.getElementById('photo-link').href = this.config.photoAlbumUrl;
+    
+    // Spotify Playlist URL setzen
+    const spotifyLink = document.getElementById('spotify-link');
+    if (spotifyLink && this.config.spotify.playlistUrl) {
+      spotifyLink.href = this.config.spotify.playlistUrl;
+    }
+    
     this.applyFeatureSettings();
   }
 
@@ -190,6 +234,46 @@ class WeddingApp {
       this.config.features.darkMode = !this.config.features.darkMode;
       this.saveFeatureSettings();
     });
+
+    // Taxi Button - Modal öffnen
+    document.getElementById('taxi-btn')?.addEventListener('click', () => {
+      if (!this.config.features.taxiFeature) return;
+      this.openTaxiModal();
+    });
+
+    // Taxi Modal schließen
+    document.getElementById('taxi-close-btn')?.addEventListener('click', () => {
+      document.getElementById('taxi-dialog').close();
+    });
+  }
+
+  openTaxiModal() {
+    const taxiDialog = document.getElementById('taxi-dialog');
+    const taxiSingleBtn = document.getElementById('taxi-single-btn');
+    const taxiGroupBtn = document.getElementById('taxi-group-btn');
+
+    // Telefonnummern für die Links setzen
+    if (this.config.taxi.single) {
+      taxiSingleBtn.href = `tel:${this.config.taxi.single}`;
+      taxiSingleBtn.style.pointerEvents = 'auto';
+      taxiSingleBtn.style.opacity = '1';
+    } else {
+      taxiSingleBtn.href = '#';
+      taxiSingleBtn.style.pointerEvents = 'none';
+      taxiSingleBtn.style.opacity = '0.5';
+    }
+
+    if (this.config.taxi.group) {
+      taxiGroupBtn.href = `tel:${this.config.taxi.group}`;
+      taxiGroupBtn.style.pointerEvents = 'auto';
+      taxiGroupBtn.style.opacity = '1';
+    } else {
+      taxiGroupBtn.href = '#';
+      taxiGroupBtn.style.pointerEvents = 'none';
+      taxiGroupBtn.style.opacity = '0.5';
+    }
+
+    taxiDialog.showModal();
   }
 
   onGuestSelected(guest) {
