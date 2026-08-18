@@ -19,10 +19,10 @@ export const CONFIG = {
     spotifyFeature: true // Spotify Playlist Feature aktiviert
   },
   taxi: {
-    single: '', // Telefonnummer für Einzeltaxi
-    group: '' // Telefonnummer für Gruppentaxi
+    single: '+49281taxi', // Telefonnummer für Einzeltaxi - HIER EINTRAGEN
+    group: '+49281großraum' // Telefonnummer für Gruppentaxi - HIER EINTRAGEN
   },
   spotify: {
-    playlistUrl: '' // Spotify Playlist URL für Musikwünsche
+    playlistUrl: 'https://open.spotify.com/playlist/deine-playlist-id' // Spotify Playlist URL - HIER EINTRAGEN
   }
 };
