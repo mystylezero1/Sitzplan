@@ -94,18 +94,36 @@ class WeddingApp {
       darkModeBtn.style.display = this.config.features.darkMode ? 'none' : 'inline-flex';
     }
     if (spotifyBtn) {
-      if (this.config.features.spotifyFeature && this.config.spotify.playlistUrl) {
+      if (this.config.features.spotifyFeature) {
         spotifyBtn.style.display = 'inline-flex';
         spotifyBtn.classList.remove('hidden');
+        // Wenn keine URL gesetzt ist, Link deaktivieren
+        if (!this.config.spotify.playlistUrl) {
+          spotifyBtn.href = '#';
+          spotifyBtn.style.pointerEvents = 'none';
+          spotifyBtn.style.opacity = '0.5';
+        } else {
+          spotifyBtn.href = this.config.spotify.playlistUrl;
+          spotifyBtn.style.pointerEvents = 'auto';
+          spotifyBtn.style.opacity = '1';
+        }
       } else {
         spotifyBtn.style.display = 'none';
         spotifyBtn.classList.add('hidden');
       }
     }
     if (taxiBtn) {
-      if (this.config.features.taxiFeature && (this.config.taxi.single || this.config.taxi.group)) {
+      if (this.config.features.taxiFeature) {
         taxiBtn.style.display = 'inline-flex';
         taxiBtn.classList.remove('hidden');
+        // Wenn keine Nummern gesetzt sind, Button deaktivieren
+        if (!this.config.taxi.single && !this.config.taxi.group) {
+          taxiBtn.style.pointerEvents = 'none';
+          taxiBtn.style.opacity = '0.5';
+        } else {
+          taxiBtn.style.pointerEvents = 'auto';
+          taxiBtn.style.opacity = '1';
+        }
       } else {
         taxiBtn.style.display = 'none';
         taxiBtn.classList.add('hidden');
