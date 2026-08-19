@@ -34,7 +34,7 @@ export const CONFIG = {
       },
       {
         name: 'Taxi 3033 Hof',
-        phone: '+4992183033'
+        phone: '+4992813033'
       }
     ]
   },
