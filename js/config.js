@@ -19,8 +19,24 @@ export const CONFIG = {
     spotifyFeature: true // Spotify Playlist Feature aktiviert
   },
   taxi: {
-    single: '+49281taxi', // Telefonnummer für Einzeltaxi - HIER EINTRAGEN
-    group: '+49281großraum' // Telefonnummer für Gruppentaxi - HIER EINTRAGEN
+    companies: [
+      {
+        name: 'Taxi Tibljas',
+        phone: '+499281794111'
+      },
+      {
+        name: 'Taxi 8088',
+        phone: '+4992818088'
+      },
+      {
+        name: 'Taxi Frisch',
+        phones: ['+4992814866', '+499281833010']
+      },
+      {
+        name: 'Taxi 3033 Hof',
+        phone: '+4992183033'
+      }
+    ]
   },
   spotify: {
     playlistUrl: 'https://open.spotify.com/playlist/0JUN3xAjBCaxL0UwXqlFO8?si=y9ZMWdueQ2WHWD7pmQVJwg&utm_source=whatsapp&pi=IAL6_fS3TUKX3&sci=spotify%3Acard-config%3A0VUG1Xza74adnjwokQU1Gm&nd=1&dlsi=8eb7f45a1f9a4831'
