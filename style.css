@@ -398,9 +398,9 @@ body.dark-mode .admin-section h4 {
     min-width: 80px;
   }
   
-  /* Spotify und Taxi Buttons auf Mobile sichtbar machen */
-  #taxi-btn, #spotify-link {
-    display: inline-flex !important;
+  /* Mobile spezifische Optimierungen */
+  .map-actions-top {
+    justify-content: center;
   }
 }
 
