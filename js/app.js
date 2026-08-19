@@ -51,14 +51,13 @@ class WeddingApp {
       this.config.spotify.playlistUrl = savedSpotifyUrl;
     }
     
-    // Taxi Telefonnummern aus localStorage laden
+    // Taxi Telefonnummern aus localStorage laden (nicht mehr nötig, wird direkt in config.js bearbeitet)
+    // Für Kompatibilität mit alten Daten aber noch vorhanden
     const savedTaxiSingle = localStorage.getItem('wedding_taxi_single');
     const savedTaxiGroup = localStorage.getItem('wedding_taxi_group');
-    if (savedTaxiSingle) {
-      this.config.taxi.single = savedTaxiSingle;
-    }
-    if (savedTaxiGroup) {
-      this.config.taxi.group = savedTaxiGroup;
+    if (savedTaxiSingle || savedTaxiGroup) {
+      // Alte Daten im localStorage ignorieren, da jetzt config.js verwendet wird
+      console.log('Alte Taxi-Daten im localStorage gefunden, werden ignoriert (config.js wird verwendet)');
     }
     
     this.applyFeatureSettings();
@@ -116,8 +115,8 @@ class WeddingApp {
       if (this.config.features.taxiFeature) {
         taxiBtn.style.display = 'inline-flex';
         taxiBtn.classList.remove('hidden');
-        // Wenn keine Nummern gesetzt sind, Button deaktivieren
-        if (!this.config.taxi.single && !this.config.taxi.group) {
+        // Wenn keine Taxi-Unternehmen konfiguriert sind, Button deaktivieren
+        if (!this.config.taxi.companies || this.config.taxi.companies.length === 0) {
           taxiBtn.style.pointerEvents = 'none';
           taxiBtn.style.opacity = '0.5';
         } else {
@@ -171,6 +170,12 @@ class WeddingApp {
     const spotifyLink = document.getElementById('spotify-link');
     if (spotifyLink && this.config.spotify.playlistUrl) {
       spotifyLink.href = this.config.spotify.playlistUrl;
+    }
+    
+    // Taxi-Konfiguration validieren
+    if (!this.config.taxi.companies || !Array.isArray(this.config.taxi.companies)) {
+      console.warn('Taxi-Konfiguration fehlt oder ist ungültig');
+      this.config.taxi.companies = [];
     }
     
     this.applyFeatureSettings();
@@ -267,29 +272,52 @@ class WeddingApp {
 
   openTaxiModal() {
     const taxiDialog = document.getElementById('taxi-dialog');
-    const taxiSingleBtn = document.getElementById('taxi-single-btn');
-    const taxiGroupBtn = document.getElementById('taxi-group-btn');
-
-    // Telefonnummern für die Links setzen
-    if (this.config.taxi.single) {
-      taxiSingleBtn.href = `tel:${this.config.taxi.single}`;
-      taxiSingleBtn.style.pointerEvents = 'auto';
-      taxiSingleBtn.style.opacity = '1';
-    } else {
-      taxiSingleBtn.href = '#';
-      taxiSingleBtn.style.pointerEvents = 'none';
-      taxiSingleBtn.style.opacity = '0.5';
-    }
-
-    if (this.config.taxi.group) {
-      taxiGroupBtn.href = `tel:${this.config.taxi.group}`;
-      taxiGroupBtn.style.pointerEvents = 'auto';
-      taxiGroupBtn.style.opacity = '1';
-    } else {
-      taxiGroupBtn.href = '#';
-      taxiGroupBtn.style.pointerEvents = 'none';
-      taxiGroupBtn.style.opacity = '0.5';
-    }
+    const taxiOptionsContainer = document.getElementById('taxi-options-container');
+    
+    // Container leeren
+    taxiOptionsContainer.innerHTML = '';
+    
+    // Taxi-Optionen aus Config generieren
+    this.config.taxi.companies.forEach((company, index) => {
+      const companyDiv = document.createElement('div');
+      companyDiv.className = 'taxi-company';
+      
+      const companyTitle = document.createElement('h4');
+      companyTitle.className = 'taxi-company-name';
+      companyTitle.textContent = company.name;
+      companyDiv.appendChild(companyTitle);
+      
+      if (company.phones && company.phones.length > 1) {
+        // Taxi Frisch: Zwei Nummern untereinander
+        company.phones.forEach(phone => {
+          const phoneBtn = document.createElement('a');
+          phoneBtn.href = `tel:${phone}`;
+          phoneBtn.className = 'btn-gold taxi-phone-btn';
+          phoneBtn.textContent = phone;
+          phoneBtn.style.pointerEvents = 'auto';
+          phoneBtn.style.opacity = '1';
+          companyDiv.appendChild(phoneBtn);
+        });
+      } else {
+        // Einzelne Nummer: Direkter Klick
+        const phone = company.phone || (company.phones && company.phones[0]);
+        const companyBtn = document.createElement('a');
+        companyBtn.href = `tel:${phone}`;
+        companyBtn.className = 'btn-gold taxi-company-btn';
+        companyBtn.innerHTML = `
+          <div class="taxi-company-icon">🚕</div>
+          <div class="taxi-company-text">
+            <div class="taxi-company-name">${company.name}</div>
+            <div class="taxi-company-phone">${phone}</div>
+          </div>
+        `;
+        companyBtn.style.pointerEvents = 'auto';
+        companyBtn.style.opacity = '1';
+        companyDiv.appendChild(companyBtn);
+      }
+      
+      taxiOptionsContainer.appendChild(companyDiv);
+    });
 
     taxiDialog.showModal();
   }
