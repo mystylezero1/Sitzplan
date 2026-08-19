@@ -115,7 +115,7 @@ export class AdminModule {
         if (featureKey === 'taxiFeature') {
           const taxiBtn = document.getElementById('taxi-btn');
           if (taxiBtn) {
-            if (e.target.checked && (this.config.taxi.single || this.config.taxi.group)) {
+            if (e.target.checked && this.config.taxi.companies && this.config.taxi.companies.length > 0) {
               taxiBtn.style.display = 'inline-flex';
               taxiBtn.classList.remove('hidden');
             } else {
@@ -389,45 +389,16 @@ export class AdminModule {
   }
 
   renderTaxiConfig() {
-    const taxiSingleInput = document.getElementById('taxi-single-input');
-    const taxiGroupInput = document.getElementById('taxi-group-input');
-    if (taxiSingleInput) {
-      taxiSingleInput.value = this.config.taxi.single || '';
-    }
-    if (taxiGroupInput) {
-      taxiGroupInput.value = this.config.taxi.group || '';
+    // Taxi-Konfiguration in Admin entfernt - wird direkt in config.js bearbeitet
+    const taxiSection = document.querySelector('.taxi-config');
+    if (taxiSection) {
+      taxiSection.innerHTML = '<p>Taxi-Konfiguration wird direkt in <code>js/config.js</code> bearbeitet.</p>';
     }
   }
 
   saveTaxiConfig() {
-    const taxiSingleInput = document.getElementById('taxi-single-input');
-    const taxiGroupInput = document.getElementById('taxi-group-input');
-    
-    if (taxiSingleInput && taxiGroupInput) {
-      const singleNumber = taxiSingleInput.value.trim();
-      const groupNumber = taxiGroupInput.value.trim();
-      
-      this.config.taxi.single = singleNumber;
-      this.config.taxi.group = groupNumber;
-      
-      // Speichern in localStorage
-      localStorage.setItem('wedding_taxi_single', singleNumber);
-      localStorage.setItem('wedding_taxi_group', groupNumber);
-      
-      // Sofort anwenden
-      const taxiBtn = document.getElementById('taxi-btn');
-      if (taxiBtn) {
-        if ((singleNumber || groupNumber) && this.config.features.taxiFeature) {
-          taxiBtn.style.display = 'inline-flex';
-          taxiBtn.classList.remove('hidden');
-        } else {
-          taxiBtn.style.display = 'none';
-          taxiBtn.classList.add('hidden');
-        }
-      }
-      
-      alert('Taxi Telefonnummern gespeichert!');
-    }
+    // Nicht mehr nötig - wird direkt in config.js bearbeitet
+    alert('Taxi-Konfiguration wird direkt in js/config.js bearbeitet.');
   }
 
   exportConfig() {
@@ -437,8 +408,7 @@ export class AdminModule {
         playlistUrl: this.config.spotify.playlistUrl
       },
       taxi: {
-        single: this.config.taxi.single,
-        group: this.config.taxi.group
+        companies: this.config.taxi.companies
       }
     };
 
@@ -475,15 +445,8 @@ export class AdminModule {
         }
         
         // Taxi Nummern wiederherstellen
-        if (configData.taxi) {
-          if (configData.taxi.single !== undefined) {
-            this.config.taxi.single = configData.taxi.single;
-            localStorage.setItem('wedding_taxi_single', configData.taxi.single);
-          }
-          if (configData.taxi.group !== undefined) {
-            this.config.taxi.group = configData.taxi.group;
-            localStorage.setItem('wedding_taxi_group', configData.taxi.group);
-          }
+        if (configData.taxi && configData.taxi.companies) {
+          this.config.taxi.companies = configData.taxi.companies;
         }
         
         // UI aktualisieren
