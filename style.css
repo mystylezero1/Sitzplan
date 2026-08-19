@@ -618,11 +618,28 @@ body.dark-mode .note-label {
 .taxi-options {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-top: 1rem;
 }
 
-.taxi-option-btn {
+.taxi-company {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.taxi-company-name {
+  font-family: Georgia, serif;
+  color: var(--gold-dark);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+body.dark-mode .taxi-company-name {
+  color: #D4AF37;
+}
+
+.taxi-company-btn {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -630,31 +647,41 @@ body.dark-mode .note-label {
   text-decoration: none;
   border-radius: 12px;
   transition: all 0.3s ease;
+  margin-top: 0.5rem;
 }
 
-.taxi-option-btn:hover {
+.taxi-company-btn:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
 
-.taxi-option-icon {
+.taxi-company-icon {
   font-size: 2rem;
 }
 
-.taxi-option-text {
+.taxi-company-text {
   text-align: left;
   flex: 1;
 }
 
-.taxi-option-title {
-  font-weight: bold;
-  font-size: 1.1rem;
-  color: var(--white);
+.taxi-company-phone {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 0.25rem;
 }
 
-.taxi-option-desc {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.9);
+.taxi-phone-btn {
+  padding: 0.6rem 1rem;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.taxi-phone-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
 }
 
 .taxi-config {
