@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+# Diese private Hochzeits-Informationsseite soll nicht von Suchmaschinen gecrawlt oder indexiert werden.
