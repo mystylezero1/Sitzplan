@@ -1,3 +1,8 @@
+const legalStyles = document.createElement('link');
+legalStyles.rel = 'stylesheet';
+legalStyles.href = 'legal.css';
+document.head.appendChild(legalStyles);
+
 const legalDialog = document.createElement('dialog');
 legalDialog.id = 'legal-dialog';
 legalDialog.className = 'modal modal-large legal-dialog';
@@ -28,14 +33,11 @@ legalDialog.innerHTML = `
       <h5>Gästeliste &amp; DSGVO-Hinweis (Pseudonymisierung)</h5>
       <p>Auf dieser Webseite existieren <strong>keine vollständigen Klarnamen</strong> (keine Kombination aus vollem Vor- und Nachnamen). Zur Platzfindung und Orientierung der Hochzeitsgäste werden ausschließlich <strong>Vornamen und maximal ein einzelner Buchstabe des Nachnamens</strong> (z. B. <em>Anna S.</em>, <em>Markus B.</em>) verwendet.</p>
       <p>Es werden keine Adressen, Telefonnummern, Geburtsdaten oder sonstigen sensiblen personenbezogenen Daten gespeichert oder verarbeitet.</p>
-
       <h5>Löschung &amp; Deaktivierung nach der Hochzeit</h5>
       <p>Ein paar Tage nach der Hochzeit werden sämtliche Gastdaten und Namen sowie alle Verlinkungen (zur Spotify-Playlist und zur Hochzeitsfoto-App) vollständig von dieser Website entfernt und dauerhaft deaktiviert.</p>
-
       <h5>Verlinkungen zu Spotify &amp; Hochzeitsfoto-App</h5>
       <p>Die Verwendung und der Aufruf der externen Verlinkungen (wie beispielsweise zu <strong>Spotify</strong> für Musikwünsche oder der <strong>Hochzeitsfoto-App</strong> für Upload, Teilen und Betrachten von Fotos) geschieht auf <strong>eigene Verantwortung</strong> der Nutzer.</p>
       <p>Beim Anklicken dieser externen Links verlassen Sie diese private Seite. Für die dortige Datenverarbeitung, Nutzungsbedingungen und Datenschutzrichtlinien sind ausschließlich die jeweiligen Anbieter der externen Dienste verantwortlich.</p>
-
       <h5>Keine Cookies oder Tracking-Tools</h5>
       <p>Diese Website verwendet keine Analyse-Tools (wie Google Analytics) und setzt keine Marketing-Cookies. Alle Darstellungen erfolgen clientseitig im Webbrowser.</p>
     </section>
