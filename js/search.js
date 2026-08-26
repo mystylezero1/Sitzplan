@@ -42,11 +42,7 @@ export class SearchModule {
     matches.slice(0, 10).forEach(guest => {
       const item = document.createElement('div');
       item.className = 'result-item';
-      
-      const table = this.guests.find(g => g.id === guest.id)?.tableId;
-      const tableName = table === 'tisch-1-2' ? 'Braut-Tisch' : table.replace('tisch-', 'Tisch ');
-      
-      item.innerText = `${guest.firstName} ${guest.lastNameInitial || ''} → ${tableName}`.trim();
+      item.innerText = `${guest.firstName} ${guest.lastNameInitial || ''}`.trim();
       
       item.addEventListener('click', () => {
         this.resultsDropdown.innerHTML = '';
