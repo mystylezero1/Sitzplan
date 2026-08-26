@@ -42,7 +42,11 @@ export class SearchModule {
     matches.slice(0, 10).forEach(guest => {
       const item = document.createElement('div');
       item.className = 'result-item';
-      item.innerText = `${guest.firstName} ${guest.lastNameInitial || ''}`.trim();
+      
+      const table = this.guests.find(g => g.id === guest.id)?.tableId;
+      const tableName = table === 'tisch-1-2' ? 'Braut-Tisch' : table.replace('tisch-', 'Tisch ');
+      
+      item.innerText = `${guest.firstName} ${guest.lastNameInitial || ''} → ${tableName}`.trim();
       
       item.addEventListener('click', () => {
         this.resultsDropdown.innerHTML = '';
@@ -67,7 +71,11 @@ export class SearchModule {
       const btn = document.createElement('button');
       btn.className = 'btn-creme';
       btn.style.width = '100%';
-      btn.innerText = `${guest.firstName} ${guest.lastNameInitial || ''}`;
+      
+      const table = guest.tableId;
+      const tableName = table === 'tisch-1-2' ? 'Braut-Tisch' : table.replace('tisch-', 'Tisch ');
+      
+      btn.innerText = `${guest.firstName} ${guest.lastNameInitial || ''} → ${tableName}`;
       
       btn.addEventListener('click', () => {
         this.dialog.close();

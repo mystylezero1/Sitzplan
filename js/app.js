@@ -69,17 +69,9 @@ class WeddingApp {
   }
 
   applyFeatureSettings() {
-    // Dark Mode
-    if (this.config.features.darkMode) {
-      document.body.classList.add('dark-mode');
-    } else {
-      document.body.classList.remove('dark-mode');
-    }
-
     // Feature-Buttons ein/ausblenden
     const toiletBtn = document.getElementById('toilet-btn');
     const speechBtn = document.getElementById('speech-btn');
-    const darkModeBtn = document.getElementById('dark-mode-btn');
     const spotifyBtn = document.getElementById('spotify-link');
     const taxiBtn = document.getElementById('taxi-btn');
 
@@ -88,9 +80,6 @@ class WeddingApp {
     }
     if (speechBtn) {
       speechBtn.style.display = this.config.features.speechGreeting ? 'inline-flex' : 'none';
-    }
-    if (darkModeBtn) {
-      darkModeBtn.style.display = this.config.features.darkMode ? 'none' : 'inline-flex';
     }
     if (spotifyBtn) {
       if (this.config.features.spotifyFeature) {
@@ -252,12 +241,6 @@ class WeddingApp {
       }
     });
 
-    // Dark Mode Toggle
-    document.getElementById('dark-mode-btn')?.addEventListener('click', () => {
-      this.config.features.darkMode = !this.config.features.darkMode;
-      this.saveFeatureSettings();
-    });
-
     // Taxi Button - Modal öffnen
     document.getElementById('taxi-btn')?.addEventListener('click', () => {
       if (!this.config.features.taxiFeature) return;
@@ -330,7 +313,6 @@ class WeddingApp {
     const tableName = table.name.replace('Tisch ', 'Tisch ');
 
     document.getElementById('target-guest-info').innerText = `${guestName} ➔ ${tableName}`;
-    document.getElementById('target-seat-info').innerText = `Dein Sitzplatz ist Nummer ${guest.seat}`;
 
     // Gästehinweise anzeigen wenn aktiviert und vorhanden
     this.showGuestNotes(guest);

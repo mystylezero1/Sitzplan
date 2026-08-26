@@ -63,7 +63,6 @@ export class AdminModule {
       speechGreeting: '🔊 Sprachbegrüßung',
       confettiAnimation: '🎉 Konfetti-Animation',
       toiletToggle: '🚻 WC-Umschalter',
-      darkMode: '🌙 Dark Mode',
       undoDelete: '↩️ Undo-Funktion',
       spotifyFeature: '🎵 Spotify Playlist',
       taxiFeature: '🚕 Taxi-Feature'
@@ -85,11 +84,6 @@ export class AdminModule {
       checkbox.addEventListener('change', (e) => {
         this.config.features[featureKey] = e.target.checked;
         localStorage.setItem('wedding_feature_settings', JSON.stringify(this.config.features));
-
-        // Dark Mode sofort anwenden
-        if (featureKey === 'darkMode') {
-          document.body.classList.toggle('dark-mode', e.target.checked);
-        }
 
         // Buttons sofort ein/ausblenden
         if (featureKey === 'toiletToggle') {
@@ -454,9 +448,6 @@ export class AdminModule {
         this.renderSpotifyConfig();
         this.renderTaxiConfig();
         
-        // Sofort anwenden
-        document.body.classList.toggle('dark-mode', this.config.features.darkMode);
-        
         const toiletBtn = document.getElementById('toilet-btn');
         if (toiletBtn) toiletBtn.style.display = this.config.features.toiletToggle ? 'inline-flex' : 'none';
         
@@ -477,7 +468,7 @@ export class AdminModule {
         
         const taxiBtn = document.getElementById('taxi-btn');
         if (taxiBtn) {
-          if (this.config.features.taxiFeature && (this.config.taxi.single || this.config.taxi.group)) {
+          if (this.config.features.taxiFeature && this.config.taxi.companies && this.config.taxi.companies.length > 0) {
             taxiBtn.style.display = 'inline-flex';
             taxiBtn.classList.remove('hidden');
           } else {
