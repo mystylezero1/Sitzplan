@@ -7,7 +7,7 @@ export const CONFIG = {
   photoAlbumUrl: 'https://app.mymillionsnaps.de/f71210da-70bf-4078-ab79-992de5e2316e/pictures',
   adminUrlParam: 'admin',
   adminUrlValue: 'true',
-  adminPin: '1234', // Standard PIN - kann geändert werden
+  adminPin: 'hochzeit2026-29-08', // Standard PIN - kann geändert werden
   features: {
     guestNotes: true, // Gästehinweise (Allergien, Essenspräferenzen, Notizen)
     speechGreeting: true, // Sprachbegrüßung beim Gast finden
