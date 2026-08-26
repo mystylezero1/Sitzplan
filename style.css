@@ -338,19 +338,11 @@ body {
   border-radius: 8px;
 }
 
-body.dark-mode .admin-section {
-  background: #3a3a3a;
-}
-
 .admin-section h4 {
   font-family: Georgia, serif;
   color: var(--gold-dark);
   margin-bottom: 0.5rem;
   font-size: 1rem;
-}
-
-body.dark-mode .admin-section h4 {
-  color: #D4AF37;
 }
 
 .admin-guest-table-container {
@@ -424,68 +416,6 @@ body.dark-mode .admin-section h4 {
   }
 }
 
-/* Dark Mode Styles */
-body.dark-mode {
-  background-color: #1a1a1a;
-  color: #f0f0f0;
-}
-
-body.dark-mode .card {
-  background: #2a2a2a;
-  border-color: #3a3a3a;
-}
-
-body.dark-mode .header h1 {
-  color: #D4AF37;
-}
-
-body.dark-mode .welcome-text h2 {
-  color: #D4AF37;
-}
-
-body.dark-mode .search-box input {
-  background: #2a2a2a;
-  border-color: #3a3a3a;
-  color: #f0f0f0;
-}
-
-body.dark-mode .search-box input:focus {
-  background: #3a3a3a;
-}
-
-body.dark-mode .results-dropdown {
-  background: rgba(42, 42, 42, 0.95);
-  border-color: #3a3a3a;
-}
-
-body.dark-mode .result-item:hover {
-  background: #3a3a3a;
-}
-
-body.dark-mode .map-viewport {
-  background: #2a2a2a;
-  border-color: #3a3a3a;
-}
-
-body.dark-mode .btn-icon {
-  background: #2a2a2a;
-  border-color: #3a3a3a;
-  color: #f0f0f0;
-}
-
-body.dark-mode .modal {
-  background: #2a2a2a;
-}
-
-body.dark-mode .admin-table th {
-  background: #3a3a3a;
-  color: #D4AF37;
-}
-
-body.dark-mode .admin-table td {
-  border-color: #3a3a3a;
-}
-
 /* Loading Spinner */
 .loading-overlay {
   position: fixed;
@@ -499,11 +429,6 @@ body.dark-mode .admin-table td {
   align-items: center;
   z-index: 10000;
 }
-
-body.dark-mode .loading-overlay {
-  background: rgba(26, 26, 26, 0.9);
-}
-
 .spinner {
   width: 50px;
   height: 50px;
@@ -579,10 +504,6 @@ input:checked + .toggle-slider:before {
   display: none;
 }
 
-body.dark-mode .guest-notes-section {
-  background: #3a3a3a;
-}
-
 .guest-notes-section.active {
   display: block;
 }
@@ -595,10 +516,6 @@ body.dark-mode .guest-notes-section {
 .note-label {
   font-weight: 600;
   color: var(--gold-dark);
-}
-
-body.dark-mode .note-label {
-  color: #D4AF37;
 }
 
 /* Taxi Modal Styles */
@@ -633,10 +550,6 @@ body.dark-mode .note-label {
   color: var(--gold-dark);
   font-size: 1.1rem;
   margin: 0;
-}
-
-body.dark-mode .taxi-company-name {
-  color: #D4AF37;
 }
 
 .taxi-company-btn {
@@ -695,19 +608,9 @@ body.dark-mode .taxi-company-name {
   color: var(--gold-dark);
 }
 
-body.dark-mode .taxi-config label {
-  color: #D4AF37;
-}
-
 .taxi-config input {
   padding: 0.5rem;
   border: 1px solid var(--gold-light);
   border-radius: 8px;
   background: var(--white);
-}
-
-body.dark-mode .taxi-config input {
-  background: #2a2a2a;
-  border-color: #3a3a3a;
-  color: #f0f0f0;
 }
